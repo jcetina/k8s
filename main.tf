@@ -14,11 +14,17 @@ resource "azurerm_virtual_network" "k8s-vnet" {
   resource_group_name = data.azurerm_resource_group.rg.name
 }
 
+resource "azurerm_subnet" "k8s-subnet" {
+  name                 = "k8s-subnet"
+  virtual_network_name = azurerm_virtual_network.k8s-vnet.name
+  resource_group_name  = data.azurerm_resource_group.rg.name
+  address_prefixes     = ["10.0.0.0/24"]
+}
 
 resource "azurerm_network_security_group" "nsg" {
-  name                = "${var.vm_name}-nsg"
-  location            = var.location
-  resource_group_name = var.rg_name
+  name                = "${azurerm_subnet.k8s-subnet.name}-nsg"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
 
   security_rule {
     name                       = "SSH"
@@ -48,13 +54,6 @@ resource "azurerm_network_security_group" "nsg" {
 resource "azurerm_subnet_network_security_group_association" "example" {
   subnet_id                 = azurerm_subnet.k8s-subnet.id
   network_security_group_id = azurerm_network_security_group.nsg.id
-}
-
-resource "azurerm_subnet" "k8s-subnet" {
-  name                 = "k8s-subnet"
-  virtual_network_name = azurerm_virtual_network.k8s-vnet.name
-  resource_group_name  = data.azurerm_resource_group.rg.name
-  address_prefixes     = ["10.0.0.0/24"]
 }
 
 module "k8s-cp" {
