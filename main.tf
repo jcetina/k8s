@@ -72,7 +72,7 @@ module "k8s-node" {
   vm_name          = "k8s-node-${count.index}"
   ssh_key          = file("ssh/id_rsa.pub")
   subnet_id        = azurerm_subnet.k8s-subnet.id
-  create_public_ip = false
+  create_public_ip = true
   zones            = ["1", "2", "3"]
   zone             = "1"
 }
