@@ -6,7 +6,7 @@ terraform {
       name = "gh-jcetina-k8s"
     }
   }
-
+  
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -16,7 +16,6 @@ terraform {
 }
 
 provider "azurerm" {
-  features {
-    use_oidc = true
-  }
+  features {}
+  use_oidc = true
 }
