@@ -34,10 +34,5 @@ curl -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --d
 
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet=1.27.2-00 kubeadm=1.27.2-00 kubectl=1.27.2-00
 sudo apt-mark hold kubelet kubeadm kubectl
-
-sudo kubeadm init --pod-network-cidr "192.168.0.0/16" --cri-socket "unix://run/containerd/containerd.sock" | tee kube.out
-
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/tigera-operator.yaml
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.1/manifests/custom-resources.yaml
