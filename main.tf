@@ -70,7 +70,7 @@ module "k8s-cp" {
 }
 
 module "k8s-node" {
-  count            = 1
+  count            = 0
   source           = "./modules/vm"
   location         = data.azurerm_resource_group.rg.location
   rg_name          = data.azurerm_resource_group.rg.name
