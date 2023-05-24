@@ -5,7 +5,6 @@ locals {
 
 data "azurerm_resource_group" "rg" {
   name     = "k8s"
-  location = local.location
 }
 
 resource "azurerm_virtual_network" "k8s-vnet" {
