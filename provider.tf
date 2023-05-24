@@ -6,7 +6,7 @@ terraform {
       name = "gh-jcetina-k8s"
     }
   }
-  
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
