@@ -1,8 +1,3 @@
-locals {
-  location   = "westus2"
-  node_count = 2
-}
-
 data "azurerm_resource_group" "rg" {
   name = "k8s"
 }
