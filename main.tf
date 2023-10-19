@@ -51,28 +51,28 @@ resource "azurerm_subnet_network_security_group_association" "example" {
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
-# module "k8s-cp" {
-#   count            = 1
-#   source           = "./modules/vm"
-#   location         = data.azurerm_resource_group.rg.location
-#   rg_name          = data.azurerm_resource_group.rg.name
-#   vm_name          = "k8s-cp-${count.index}"
-#   ssh_key          = file("ssh/id_rsa.pub")
-#   subnet_id        = azurerm_subnet.k8s-subnet.id
-#   create_public_ip = true
-#   zones            = ["1", "2", "3"]
-#   zone             = "1"
-# }
+module "k8s-cp" {
+  count            = 1
+  source           = "./modules/vm"
+  location         = data.azurerm_resource_group.rg.location
+  rg_name          = data.azurerm_resource_group.rg.name
+  vm_name          = "k8s-cp-${count.index}"
+  ssh_key          = file("ssh/id_rsa.pub")
+  subnet_id        = azurerm_subnet.k8s-subnet.id
+  create_public_ip = true
+  zones            = ["1", "2", "3"]
+  zone             = "1"
+}
 
-# module "k8s-node" {
-#   count            = 1
-#   source           = "./modules/vm"
-#   location         = data.azurerm_resource_group.rg.location
-#   rg_name          = data.azurerm_resource_group.rg.name
-#   vm_name          = "k8s-node-${count.index}"
-#   ssh_key          = file("ssh/id_rsa.pub")
-#   subnet_id        = azurerm_subnet.k8s-subnet.id
-#   create_public_ip = true
-#   zones            = ["1", "2", "3"]
-#   zone             = "1"
-# }
+module "k8s-node" {
+  count            = 1
+  source           = "./modules/vm"
+  location         = data.azurerm_resource_group.rg.location
+  rg_name          = data.azurerm_resource_group.rg.name
+  vm_name          = "k8s-node-${count.index}"
+  ssh_key          = file("ssh/id_rsa.pub")
+  subnet_id        = azurerm_subnet.k8s-subnet.id
+  create_public_ip = true
+  zones            = ["1", "2", "3"]
+  zone             = "1"
+}

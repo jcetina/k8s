@@ -39,7 +39,7 @@ variable "zones" {
 variable "vm_sku" {
   type        = string
   description = "VM SKU for the vm"
-  default     = "Standard_D4ads_v5"
+  default     = "Standard_D2ads_v5"
 }
 
 variable "zone" {
